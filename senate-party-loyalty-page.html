@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
-    <title>Senate Attendance</title>
+    <title>Senate Party Loyalty</title>
 </head>
 
 <body>
@@ -18,63 +18,57 @@
                 <div class="col-md-6">
                     <h1><i class="fa fa-university"></i> TGIF</h1>
                 </div>
-                <div class="col text-right">
-
-                    <a href="mailto:berenguer.pou@gmail.com"><span
-                            class="glyphicon glyphicon-envelope danger"></span></a> <a
-                        href="mailto:berenguer.pou@gmail.com">info@tgif.net</a>
-                </div>
             </div>
         </div>
     </header>
 
     <nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse p-0">
         <div class="container">
-          <button class="navbar-toggler navbar-toggler-right" data-toggle="collapse" data-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <a href="index.html" class="navbar-brand mr-3">Home</a>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item px-2">
-                <a href="index.html" class="nav-link active">TGIF</a>
-              </li>
-              <li class="nav-item dropdown mr-3">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Congress
-                  113</a>
-                <div class="dropdown-menu">
-                  <a href="house-data.html" class="dropdown-item">
-                    House
-                  </a>
-                  <a href="senate-data.html" class="dropdown-item">
-                    Senate
-                  </a>
-                  <li class="nav-item dropdown mr-3">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Attendance
-                      </a>
-                    <div class="dropdown-menu">
-                      <a href="house-attendance.html" class="dropdown-item">
-                        House
-                      </a>
-                      <a href="senate-attendance.html" class="dropdown-item">
-                        Senate
-                      </a>
-                      <li class="nav-item dropdown mr-3">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Party Loyalty
-                          </a>
+            <button class="navbar-toggler navbar-toggler-right" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a href="index.html" class="navbar-brand mr-3">Home</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item px-2">
+                        <a href="index.html" class="nav-link active">TGIF</a>
+                    </li>
+                    <li class="nav-item dropdown mr-3">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Congress
+                            113</a>
                         <div class="dropdown-menu">
-                          <a href="house-party-loyalty-page.html" class="dropdown-item">
-                            House
-                          </a>
-                          <a href="senate-party-loyalty-page.html" class="dropdown-item">
-                            Senate
-                          </a>
-            </ul>
-    
-    
-          </div>
+                            <a href="house-data.html" class="dropdown-item">
+                                House
+                            </a>
+                            <a href="senate-data.html" class="dropdown-item">
+                                Senate
+                            </a>
+                    <li class="nav-item dropdown mr-3">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Attendance
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="house-attendance.html" class="dropdown-item">
+                                House
+                            </a>
+                            <a href="senate-attendance.html" class="dropdown-item">
+                                Senate
+                            </a>
+                    <li class="nav-item dropdown mr-3">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Party Loyalty
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="house-party-loyalty-page.html" class="dropdown-item">
+                                House
+                            </a>
+                            <a href="senate-party-loyalty-page.html" class="dropdown-item">
+                                Senate
+                            </a>
+                </ul>
+
+
+            </div>
         </div>
-      </nav>
+    </nav>
 
     <!--Table container-->
 
@@ -85,8 +79,10 @@
                 <div class="col-sm-6">
                     <div>
                         <h2>Party Loyalty</h2>
-            <p>Those who consider themselves to be strong partisans, strong Democrats and strong Republicans respectively, tend to be the most faithful in voting for their party's nominee for office and legislation that backs their party's agenda. </p>
-    	    
+                        <p>Those who consider themselves to be strong partisans, strong Democrats and strong Republicans
+                            respectively, tend to be the most faithful in voting for their party's nominee for office
+                            and legislation that backs their party's agenda. </p>
+
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -105,14 +101,19 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>Republican</td>
+                                                <td>Republicans</td>
                                                 <td id="repnum">--</td>
                                                 <td id="repvote">--</td>
                                             </tr>
                                             <tr>
-                                                <td>Democrat</td>
+                                                <td>Democrats</td>
                                                 <td id="demnum">--</td>
                                                 <td id="demvote">--</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Independents</td>
+                                                <td id="Indnum">--</td>
+                                                <td id="Indvote">--</td>
                                             </tr>
                                             <tr>
                                                 <td>Total</td>
@@ -133,7 +134,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
-                    <h3>Least Loyal (Bottom 10% Attendance)</h3>
+                    <h3>Least Loyal (Bottom 10% of Party)</h3>
                     <table class="table table-striped">
                         <thead class="thead-inverse">
                             <th>Name</th>
@@ -142,7 +143,7 @@
 
                         </thead>
                         <tbody id="leastBody">
-                            <tr v-for="">
+                            <tr >
 
                             </tr>
                         </tbody>
@@ -155,7 +156,7 @@
 
                 <div class="col-lg-6">
 
-                    <h3>Most Loyal (Top 10% Attendance)</h3>
+                    <h3>Most Loyal (Top 10% of Party)</h3>
 
                     <table class="table table-striped">
                         <thead class="thead-inverse">
@@ -165,7 +166,7 @@
 
                         </thead>
                         <tbody id="mostBody">
-                            <tr v-for="">
+                            <tr >
 
                             </tr>
                         </tbody>
@@ -196,7 +197,7 @@
 
 
     <script src="./pro-Congress-113-senate.js"></script>
-    <script src="./statistics.js"></script>
+    <script src="./party_loyalty.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/tether.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -204,5 +205,3 @@
 </body>
 
 </html>
-           
-           
