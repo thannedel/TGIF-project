@@ -10,19 +10,19 @@ var members;
 
 function fetching() {
   var fetchConfig = fetch(this.site, {
-    method: "GET",
-    headers: new Headers({
-      "X-API-Key": "IeE1wTU066tNtYjhtk94zacJt53Q0OTHRia9YAJw"
+      method: "GET",
+      headers: new Headers({
+        "X-API-Key": "IeE1wTU066tNtYjhtk94zacJt53Q0OTHRia9YAJw"
+      })
     })
-  })
-    .then(function(res) {
+    .then(function (res) {
       if (res.ok) return res.json();
     })
-    .then(function(json) {
+    .then(function (json) {
       data = json;
 
       members = data.results[0].members;
-
+      var spin = document.getElementById("loader").style.display = "none"
       attendance();
       glance();
       if (window.location.href.includes("attendance")) {
@@ -38,7 +38,7 @@ function fetching() {
         topLoyalTable();
       }
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.log(error);
     });
 }
@@ -134,10 +134,11 @@ function most_engaged() {
     obj.name = members[i]["first_name"] + " " + members[i]["last_name"];
     obj.num_missed_votes = members[i]["missed_votes"];
     obj.perc_missed_votes = members[i]["missed_votes_pct"];
+    obj.links = members[i].url;
     listData.push(obj);
   }
 
-  listData.sort(function(obj1, obj2) {
+  listData.sort(function (obj1, obj2) {
     return obj1.perc_missed_votes - obj2.perc_missed_votes;
   });
 
@@ -155,9 +156,12 @@ function mostEngagedTable() {
   for (i = 0; i < listDataFiltered.length; i++) {
     var row = document.createElement("tr");
     var fullName = listDataFiltered[i].name;
+    var link = document.createElement("a");
+    link.setAttribute("href", listDataFiltered[i].links);
+    link.innerHTML = fullName;
     var totmissedVotes = listDataFiltered[i].num_missed_votes;
     var percMissedVotes = listDataFiltered[i].perc_missed_votes;
-    var cells = [fullName, totmissedVotes, percMissedVotes];
+    var cells = [link, totmissedVotes, percMissedVotes];
     console.log(cells);
     for (var j = 0; j < cells.length; j++) {
       var tableColumns = document.createElement("td");
@@ -183,10 +187,11 @@ function least_engaged() {
     obj.name = members[i]["first_name"] + " " + members[i]["last_name"];
     obj.num_missed_votes = members[i]["missed_votes"];
     obj.perc_missed_votes = members[i]["missed_votes_pct"];
+    obj.links = members[i].url;
     listData.push(obj);
   }
 
-  listData.sort(function(obj1, obj2) {
+  listData.sort(function (obj1, obj2) {
     return obj2.perc_missed_votes - obj1.perc_missed_votes;
   });
 
@@ -204,9 +209,12 @@ function leastEngagedTable() {
   for (i = 0; i < listDataFiltered.length; i++) {
     var row = document.createElement("tr");
     var fullName = listDataFiltered[i].name;
+    var link = document.createElement("a");
+    link.setAttribute("href", listDataFiltered[i].links);
+    link.innerHTML = fullName;
     var totmissedVotes = listDataFiltered[i].num_missed_votes;
     var percMissedVotes = listDataFiltered[i].perc_missed_votes;
-    var cells = [fullName, totmissedVotes, percMissedVotes];
+    var cells = [link, totmissedVotes, percMissedVotes];
     console.log(cells);
     for (var j = 0; j < cells.length; j++) {
       var tableColumns = document.createElement("td");
@@ -233,10 +241,11 @@ function least_loyal() {
     obj.name = members[i]["first_name"] + " " + members[i]["last_name"];
     obj.num_total_votes = members[i]["total_votes"];
     obj.perc_vote_wparty_pct = members[i]["votes_with_party_pct"];
+    obj.links = members[i].url;
     listData.push(obj);
   }
 
-  listData.sort(function(obj1, obj2) {
+  listData.sort(function (obj1, obj2) {
     return obj1.perc_vote_wparty_pct - obj2.perc_vote_wparty_pct;
   });
 
@@ -250,12 +259,16 @@ function least_loyal() {
 }
 
 function bottomLoyalTable() {
-  for (i = 0; i < statistics.leastLoyal.length; i++) {
+  var listDataFiltered = statistics.leastLoyal;
+  for (i = 0; i < listDataFiltered.length; i++) {
     var row = document.createElement("tr");
-    var fullName = statistics.leastLoyal[i].name;
-    var totmissedVotes = statistics.leastLoyal[i].num_total_votes;
-    var percMissedVotes = statistics.leastLoyal[i].perc_vote_wparty_pct;
-    var cells = [fullName, totmissedVotes, percMissedVotes];
+    var fullName = listDataFiltered[i].name;
+    var link = document.createElement("a");
+    link.setAttribute("href", listDataFiltered[i].links);
+    link.innerHTML = fullName;
+    var totmissedVotes = listDataFiltered[i].num_total_votes;
+    var percMissedVotes = listDataFiltered[i].perc_vote_wparty_pct;
+    var cells = [link, totmissedVotes, percMissedVotes];
     console.log(cells);
     for (var j = 0; j < cells.length; j++) {
       var tableColumns = document.createElement("td");
@@ -282,10 +295,11 @@ function most_loyal() {
     obj.name = members[i]["first_name"] + " " + members[i]["last_name"];
     obj.num_total_votes = members[i]["total_votes"];
     obj.perc_vote_wparty_pct = members[i]["votes_with_party_pct"];
+    obj.links = members[i].url;
     listData.push(obj);
   }
 
-  listData.sort(function(obj1, obj2) {
+  listData.sort(function (obj1, obj2) {
     return obj2.perc_vote_wparty_pct - obj1.perc_vote_wparty_pct;
   });
 
@@ -303,9 +317,12 @@ function topLoyalTable() {
   for (i = 0; i < listDataFiltered.length; i++) {
     var row = document.createElement("tr");
     var fullName = listDataFiltered[i].name;
+    var link = document.createElement("a");
+    link.setAttribute("href", listDataFiltered[i].links);
+    link.innerHTML = fullName;
     var totmissedVotes = listDataFiltered[i].num_total_votes;
     var percMissedVotes = listDataFiltered[i].perc_vote_wparty_pct;
-    var cells = [fullName, totmissedVotes, percMissedVotes];
+    var cells = [link, totmissedVotes, percMissedVotes];
     console.log(cells);
     for (var j = 0; j < cells.length; j++) {
       var tableColumns = document.createElement("td");

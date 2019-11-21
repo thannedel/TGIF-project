@@ -16,8 +16,8 @@
   <header id="main-header" class="py-2 bg-warning text-white">
     <div class="container">
       <div class="row">
-        <div class="col-md-6">
-          <h1><i class="fa fa-university"></i> TGIF</h1>
+        <div class="col-md-9">
+          <h1><i class="fa fa-university"></i>Transparent Goverment In Fact</h1>
         </div>
       </div>
     </div>
@@ -93,53 +93,55 @@
       </div>
     </div>
 
-    <input type="checkbox" id="hide">
-    <label for="hide">Democrats</label>
-    <input type="checkbox" id="hideR">
-    <label for="hideR">Republicans</label>
-    <input type="checkbox" id="hideI">
-    <label for="hideI">Independent</label>
-
-
-
-      <label for="dropDownBody">Filter by State
-        <select class="dropdown" id="dropDownBody" name="states">
-          <option value="All" selected>All</option>
-        </select>
-      </label>
-
-
     <section id="table">
       <div class="container">
         <div class="row">
           <div class="col-md-9">
-
-
-
-            <table id="senate-data">
+            <table id="house-data">
               <table class="table table-striped">
-                <thead class="thead-inverse">
-                  <th>Name</th>
-                  <th>Party</th>
-                  <th>State</th>
-                  <th>Seniority</th>
-                  <th>Percentage of Votes</th>
-                </thead>
-                <tbody id="tableBody">
-                  <tr>
-
-                  </tr>
-                </tbody>
-              </table>
-            </table>
-
-
+                <div class="d-flex">
+                  <div class="p-2"><input type="checkbox" id="hide">
+                    <label for="hide">Democrats</label></div>
+                  <div class="p-2"> <input type="checkbox" id="hideR">
+                    <label for="hideR">Republicans</label></div>
+                  <div class="p-2"><input type="checkbox" id="hideI">
+                    <label for="hideI">Independent</label></div>
+                  <div class="ml-auto p-2">
+                    <label for="dropDownBody">Filter by State
+                      <select class="dropdown" id="dropDownBody" name="states">
+                        <option value="All" selected>All</option>
+                      </select>
+                    </label>
+                  </div>
+                </div>
           </div>
+
+          <thead class="thead-inverse">
+
+
+            <th>Name</th>
+            <th>Party</th>
+            <th>State</th>
+            <th>Seniority</th>
+            <th>Percentage of Votes</th>
+          </thead>
+
+          <tbody id="tableBody">
+
+            <tr></tr>
         </div>
+        </tbody>
+        </table>
+        </table>
+      </div>
+      </div>
       </div>
     </section>
+
+    <div style="display: block;" id="loader"></div>
   </section>
-  <section id="explore-section" class="bg-faded text-muted py-6">
+
+  <section class="bg-faded text-muted py-6">
     <footer id="main-footer" class="bg-inverse">
       <div class="container">
         <div class="row">
@@ -147,14 +149,15 @@
             <div class="py-4">
               <h1 class="h3">TGIF</h1>
               <p>Copyright &copy; 2019</p>
-              <button class="btn btn-primary" data-toggle="modal" data-target="#contactModal">Contact Us</button>
+              <a href="mailto:berenguer.pou@gmail.com" target="_blank" class="btn btn-primary">Contact Us</a>
             </div>
           </div>
         </div>
       </div>
     </footer>
   </section>
-  <script src="./pro-Congress-113-senate.js"></script>
+  </div>
+
   <script src="./main.js"></script>
 
   <script src="js/jquery.min.js"></script>

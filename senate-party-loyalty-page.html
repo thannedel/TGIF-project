@@ -12,11 +12,11 @@
 </head>
 
 <body>
-    <header id="main-header" class="py-2 bg-warning text-white">
+    <header id="main-header" class="py-2 bg-danger text-white">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <h1><i class="fa fa-university"></i> TGIF</h1>
+                <div class="col-md-9">
+                    <h1><i class="fa fa-university"></i>Transparent Goverment In Fact</h1>
                 </div>
             </div>
         </div>
@@ -129,6 +129,7 @@
                 </div>
             </div>
         </div>
+        <div style="display: block;" id="loader"></div>
     </section>
     <section id="explore-section" class="bg-faded text-muted py-5">
         <div class="container">
@@ -142,8 +143,8 @@
                             <th>% Party Votes</th>
 
                         </thead>
-                        <tbody id="leastBody">
-                            <tr >
+                        <tbody id="bottomLoyalBody">
+                            <tr>
 
                             </tr>
                         </tbody>
@@ -165,10 +166,8 @@
                             <th>% Party Votes</th>
 
                         </thead>
-                        <tbody id="mostBody">
-                            <tr >
-
-                            </tr>
+                        <tbody id="topLoyalBody">
+                            <tr></tr>
                         </tbody>
                     </table>
                 </div>
@@ -196,8 +195,9 @@
 
 
 
-    <script src="./pro-Congress-113-senate.js"></script>
-    <script src="./party_loyalty.js"></script>
+    <!--     <script src="pro-Congress-113-senate.js"></script>
+ -->
+    <script src="./statistics.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/tether.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
