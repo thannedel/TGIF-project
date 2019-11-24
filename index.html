@@ -12,20 +12,16 @@
 </head>
 
 <body>
-
   <header id="main-header" class="py-2 bg-warning text-white">
     <div class="container">
       <div class="row">
 
 
-        <a href="#" class="navbar-brand">
-          <img src="./images/tgif_logo.png" width="50" height="50" alt="">
-        </a>
-        <div class="ml-auto p-2 bd-highlight">
-          <h1 class="d-inline align-right">Transparent Goverment In Fact</h1>
+        <div class="col-md-9">
+          <h1><i class="fa fa-university"></i> TGIF</h1>
+          <p>Transparent Government In Fact</p>
+
         </div>
-
-
       </div>
     </div>
   </header>
@@ -35,9 +31,12 @@
       <button class="navbar-toggler navbar-toggler-right" data-toggle="collapse" data-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a href="index.html" class="navbar-brand mr-3">Home</a>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a href="index.html" class="nav-link">Home </a>
+        </li>
+        <div class="collapse navbar-collapse" id="navbarNav">
+
 
           <li class="nav-item dropdown mr-3">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Congress
@@ -69,97 +68,171 @@
               <a href="senate-party-loyalty-page.html" class="dropdown-item">
                 Senate
               </a>
-        </ul>
+      </ul>
 
 
-      </div>
+    </div>
     </div>
   </nav>
 
-  <section id="explore-section" class="bg-faded text-muted py-5">
-    <div class="container">
-      <div class="row">
-        <div class="row-md-3">
-          <img src="./images/jason-briscoe-Gw_sFen8VhU-unsplash.jpg" alt="" class="img-fluid mb-3 rounded-circle">
+  <!-- SHOWCASE SLIDER -->
+  <section id="showcase">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item carousel-image-1 active">
+          <div class="container">
+            <div class="carousel-caption d-none d-sm-block text-right mb-5">
+              <h1 class="display-3">The House</h1>
+              <p class="lead">The major power of the House is to pass federal legislation that affects the entire
+                country</p>
+              <a href="house-data.html" class="btn btn-danger btn-lg">Learn More</a>
+            </div>
+          </div>
         </div>
 
-        <h2>About Us</h2>
-        <p>Openness, accountability, and honesty define government transparency. In a free society, transparency is
-          government's obligation to share information with citizens. It is at the heart of how citizens hold their
-          public officials accountable. Here at TGIF we believe that government should be transparent.</p>
-        <p>Governments exist to serve the people. Information on how officials conduct the public business and spend
-          taxpayer money must be readily available and easily understood. This transparency allows good and just
-          governance. Transparency promotes accountability and provides information for citizens about what their
-          Government is doing.</p>
-        <p>We also believe that government should be participatory. Public engagement enhances the Government's
-          effectiveness and improves the quality of its decisions. Knowledge is widely dispersed in society, and
-          public officials benefit from having access to that dispersed knowledge. We invite you to use our site to
-          become actively engaged in American government.</p>
-        <p>TGIF works to disclose information in forms that the public can readily find and use. We solicit public
-          feedback to identify information of greatest use to the public.</p>
-        <div id="accordion">
-          <div class="card">
-            <div class="card-header" id="headingOne">
-              <h5 class="mb-0">
-                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-                  aria-controls="collapseOne">
-                  Read more
-                </button>
-              </h5>
+        <div class="carousel-item carousel-image-2">
+          <div class="container">
+            <div class="carousel-caption d-none d-sm-block mb-5">
+              <h1 class="display-3">The Senate</h1>
+              <p class="lead">First convened in 1789, the composition and powers of the Senate are established in
+                Article One of the U.S. Constitution. Each state is represented by two senators, regardless of
+                population, who serve staggered six-year terms.</p>
+              <a href="senate-data.html" class="btn btn-primary btn-lg">Learn More</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item carousel-image-3">
+          <div class="container">
+            <div class="carousel-caption d-none d-sm-block text-right mb-5">
+              <h1 class="display-3">Get In Touch</h1>
+              <p class="lead">We re allways standing by and eager to help</p>
+              <a href="mailto:berenguer.pou@gmail.com" class="btn btn-success btn-lg">Contact Us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="#myCarousel" data-slide="prev" class="carousel-control-prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a href="#myCarousel" data-slide="next" class="carousel-control-next">
+        <span class="carousel-control-next-icon"></span>
+      </a>
+    </div>
+  </section>
+  <section id="about" class="my-5 py-5 text-center bg-faded">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div id="accordion" role="tablist">
+            <div class="card">
+              <div class="card-header" role="tab" id="heading1">
+                <h5 class="mb-0">
+                  <div href="#collapse1" data-toggle="collapse" data-parent="#accordion">
+                    <i class="fa fa-arrow-circle-down"></i> About Us
+                  </div>
+                </h5>
+              </div>
+
+              <div id="collapse1" class="collapse show">
+                <div class="card-block">
+                  Openness, accountability, and honesty define government transparency. In a free society, transparency
+                  is
+                  government's obligation to share information with citizens. It is at the heart of how citizens hold
+                  their public
+                  officials accountable. Here at TGIF we believe that government should be transparent.
+
+                  Governments exist to serve the people. Information on how officials conduct the public business and
+                  spend
+                  taxpayer money must be readily available and easily understood. This transparency allows good and just
+                  governance. Transparency promotes accountability and provides information for citizens about what
+                  their
+                  Government is doing.
+
+                  We also believe that government should be participatory. Public engagement enhances the Government's
+                  effectiveness and improves the quality of its decisions. Knowledge is widely dispersed in society, and
+                  public
+                  officials benefit from having access to that dispersed knowledge. We invite you to use our site to
+                  become
+                  actively engaged in American government.
+
+                  TGIF works to disclose information in forms that the public can readily find and use. We solicit
+                  public
+                  feedback
+                  to identify information of greatest use to the public.
+                </div>
+              </div>
             </div>
 
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-              <div class="card-body">
-                <div class="row mx-md-n5">
-                  <div class="col px-md-5">
-                    <h3>Background History of Government Transparency</h3>
-                    <p>In the West, the idea that government should be open to public scrutiny and susceptible to public
-                      opinion
-                      dates back at least to the time of the Enlightenment, when many philosophes made an attack on
-                      absolutist
-                      doctrine of state secrecy, a core part of their intellectual project. The passage of formal
-                      legislative
-                      instruments to this end can also be traced to this time with Sweden, for example, (which then
-                      included
-                      Finland as a Swedish-governed territory) enacting free press legislation as part of its
-                      constitution
-                      (Freedom of the Press Act, 1766). This approach, and that of the philosophes more broadly, is
-                      strongly
-                      related to recent historiography on the eighteenth-century public sphere.</p>
-
-                    <p>Influenced by Enlightenment thought, the revolutions in America (1776) and France (1789), freedom
-                      of
-                      the press enshrined provisions and requirements for public budgetary accounting and freedom of the
-                      press
-                      in constitutional articles. In the nineteenth century, attempts by Metternichean statesmen to row
-                      back
-                      on these measures were vigorously opposed by a number of eminent liberal politicians and writers,
-                      Bentham, Mill and Acton prominent among the latter.</p>
-
-                    <p>Open government is widely seen to be a key hallmark of contemporary democratic practice and is
-                      often
-                      linked to the passing of freedom of information legislation. Scandinavian countries claim to have
-                      adopted the first freedom of information legislation, dating the origins of its modern provisions
-                      to the
-                      eighteenth century and Finland continuing the presumption of openness after gaining independence
-                      in
-                      1917, passing its Act on Publicity of Official Documents in 1951 (superseded by new legislation in
-                      1999).</p>
-
-                    <p>The United States passed its Freedom of Information Act (FOIA) in 1966, FOIAs, Access to
-                      Information
-                      Acts (AIAs) or equivalent laws were passed in Denmark and Norway in 1970.</p>
+            <div class="card">
+              <div class="card-header" role="tab" id="heading2">
+                <h5 class="mb-0">
+                  <div class="collapsed" href="#collapse2" data-toggle="collapse" data-parent="#accordion">
+                    <i class="fa fa-arrow-circle-down"></i> Background History of Government Transparency
                   </div>
+                </h5>
+              </div>
+
+              <div id="collapse2" class="collapse">
+                <div class="card-block">
+                  In the West, the idea that government should be open to public scrutiny and susceptible to public
+                  opinion dates back
+                  at
+                  least to the time of the Enlightenment, when many philosophes made an attack on absolutist doctrine of
+                  state secrecy,
+                  a
+                  core part of their intellectual project. The passage of formal legislative instruments to this end can
+                  also be traced
+                  to
+                  this time with Sweden, for example, (which then included Finland as a Swedish-governed territory)
+                  enacting free press
+                  legislation as part of its constitution (Freedom of the Press Act, 1766). This approach, and that of
+                  the
+                  philosophes
+                  more broadly, is strongly related to recent historiography on the eighteenth-century public sphere.
+
+                  Influenced by Enlightenment thought, the revolutions in America (1776) and France (1789), freedom of
+                  the
+                  press
+                  enshrined
+                  provisions and requirements for public budgetary accounting and freedom of the press in constitutional
+                  articles. In
+                  the
+                  nineteenth century, attempts by Metternichean statesmen to row back on these measures were vigorously
+                  opposed by a
+                  number of eminent liberal politicians and writers, Bentham, Mill and Acton prominent among the latter.
+
+                  Open government is widely seen to be a key hallmark of contemporary democratic practice and is often
+                  linked to the
+                  passing of freedom of information legislation. Scandinavian countries claim to have adopted the first
+                  freedom of
+                  information legislation, dating the origins of its modern provisions to the eighteenth century and
+                  Finland continuing
+                  the presumption of openness after gaining independence in 1917, passing its Act on Publicity of
+                  Official
+                  Documents in
+                  1951 (superseded by new legislation in 1999).
+
+                  The United States passed its Freedom of Information Act (FOIA) in 1966, FOIAs, Access to Information
+                  Acts (AIAs) or
+                  equivalent laws were passed in Denmark and Norway in 1970.
                 </div>
               </div>
             </div>
           </div>
-          <img src="./images/you-x-ventures-IQY_q-RqaIo-unsplash.jpg" alt="" class="img-fluid mb-3">
-
         </div>
       </div>
     </div>
   </section>
+
+
+
   <section class="bg-faded text-muted py-6">
     <footer id="main-footer" class="bg-inverse">
       <div class="container">
@@ -175,9 +248,11 @@
       </div>
     </footer>
   </section>
+
   <script src="js/jquery.min.js"></script>
   <script src="js/tether.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
+
 </body>
 
 </html>

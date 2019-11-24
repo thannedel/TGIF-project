@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Senate</title>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <input type="checkbox" id="republicans" value="republicans" v-model="checkedParty">
+        <label for="republicans">Republicans</label>
+        <input type="checkbox" id="democrats" value="democrats" v-model="checkedParty">
+        <label for="democrats">Democrats</label>
+        <input type="checkbox" id="independents" value="independents" v-model="checkedParty">
+        <label for="independents">Independents</label>
+        <br>
+        <span>Checked names: {{ checkedParty }}</span>
+        <ul v-for="states in statesArray">
+            <li>{{states.states}}</li>
+        </ul>
+
+        <select v-model="selected">
+            <option disabled value="">All</option>
+            <option v-for="states in statesArray">{{states.state}}</option>
+
+        </select>
+        <!--<span>Selected: {{ selected }}</span>-->
+
+
+
+        <table v-for="post in posts">
+            <tr>
+                <td>{{post.first_name + post.last_name}}</td>
+                <td>{{post.party}}</td>
+                <td>{{post.state}}</td>
+                <td>{{post.seniority}}</td>
+                <td>{{post.votes_with_party_pct}}</td>
+            </tr>
+
+        </table>
+
+
+
+
+
+    </div>
+
+
+
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="vue.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/tether.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>
