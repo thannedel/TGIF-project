@@ -45,6 +45,8 @@ function fetching() {
         })
 }
 
+
+
 var selectedState = 'All';
 var selectedParties = [];
 
