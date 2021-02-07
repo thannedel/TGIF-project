@@ -76,7 +76,6 @@ var statistics = {
   leastLoyal: []
 };
 
-//console.log(statistics);
 
 function attendance() {
   for (var i = 0; i < members.length; i++) {
@@ -169,7 +168,6 @@ function most_engaged() {
       listDataFiltered.push(listData[i]);
     }
   }
-  console.log(listDataFiltered.length);
   statistics.mostEngaged = listDataFiltered;
 }
 
@@ -228,7 +226,6 @@ function least_engaged() {
     }
   }
   statistics.leastEngaged = listDataFiltered;
-  console.log(listDataFiltered.length)
 }
 
 function leastEngagedTable() {
@@ -342,7 +339,6 @@ function most_loyal() {
       listDataFiltered.push(listData[i]);
     }
   }
-  console.log(listDataFiltered.length);
   statistics.mostLoyal = listDataFiltered;
 }
 
