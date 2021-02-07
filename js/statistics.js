@@ -51,7 +51,7 @@ window.onscroll = function () {
 };
 
 function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+  if (document.body.scrollTop > 700 || document.documentElement.scrollTop > 700) {
     mybutton.style.display = "block";
   } else {
     mybutton.style.display = "none";
@@ -59,8 +59,7 @@ function scrollFunction() {
 }
 
 function topFunction() {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
+  window.scrollTo({top: 0, behavior: 'smooth'});
 }
 var statistics = {
   numberOfDem: 0,
