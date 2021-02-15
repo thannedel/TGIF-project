@@ -1,12 +1,12 @@
 {
-  "name": "glozzom",
+  "name": "tgif",
   "version": "1.0.0",
-  "description": "Multi page Bootstrap 4 theme",
+  "description": "web application that manipulates JSON data to display Congressional representative information using AJAX calls",
   "main": "index.js",
   "scripts": {
     "start": "gulp"
   },
-  "author": "Brad Traversy",
+  "author": "Thanos",
   "license": "MIT",
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.6",
