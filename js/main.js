@@ -43,7 +43,7 @@ function fetching() {
     })
 }
 
-var mybutton = document.getElementById("myBtn");
+
 
 
 window.onscroll = function () {
@@ -51,6 +51,7 @@ window.onscroll = function () {
 };
 
 function scrollFunction() {
+  const mybutton = document.getElementById("myBtn");
   if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {
     mybutton.style.display = "block";
   } else {
