@@ -22,22 +22,13 @@ function fetching() {
       data = json;
 
       members = data.results[0].members;
+      let ptn = Math.round((members.length * (10 / 100)));
+      statistics.ptn = ptn;
+      let spin = document.getElementById("loader").style.display = "none"
       
-      var spin = document.getElementById("loader").style.display = "none"
       attendance();
       glance();
-      if (window.location.href.includes("attendance")) {
-        least_engaged();
-        most_engaged();
-        mostEngagedTable();
-        leastEngagedTable();
-      }
-      if (window.location.href.includes("loyalty")) {
-        most_loyal();
-        least_loyal();
-        bottomLoyalTable();
-        topLoyalTable();
-      }
+      createMembersObject(members)
     })
     .catch(function (error) {
       console.log(error);
@@ -61,7 +52,8 @@ function scrollFunction() {
 function topFunction() {
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
-var statistics = {
+
+const statistics = {
   numberOfDem: 0,
   numberOfRep: 0,
   independents: 0,
@@ -69,15 +61,15 @@ var statistics = {
   repvotedwparty: 0,
   demvotedwparty: 0,
   totalvotedwparty: 0,
-  leastEngaged: [],
-  mostEngaged: [],
-  mostLoyal: [],
-  leastLoyal: []
+  ptn: "",             // 10% of members
+  membersObj: [],
+  leastEngagedMostLoyal: [],
+  mostEngagedLeastLoyal:[]
 };
 
 
 function attendance() {
-  for (var i = 0; i < members.length; i++) {
+  for (let i = 0; i < members.length; i++) {
     if (members[i].party === "D") {
       statistics.numberOfDem++;
     } else if (members[i].party === "R") {
@@ -89,9 +81,9 @@ function attendance() {
   statistics.totalNumber =
     statistics.numberOfDem + statistics.numberOfRep + statistics.independents;
 
-  var sum1 = 0;
-  var sum2 = 0;
-  var sum3 = 0;
+  let sum1 = 0;
+  let sum2 = 0;
+  let sum3 = 0;
   for (i = 0; i < members.length; i++) {
     if (members[i].party === "D") {
       sum1 += members[i].votes_with_party_pct;
@@ -138,228 +130,91 @@ function glance() {
   totalvote.innerHTML = statistics.totalvotedwparty;
 }
 
-function most_engaged() {
-  var listData = [];
+const createMembersObject = (members) => {
+    const membersObj = members.map(member => {
+        const obj = {};
 
-  for (var i = 0; i < members.length; i++) {
-    var obj = {
-      name: "",
-      num_missed_votes: "",
-      perc_missed_votes: ""
-    };
-
-    obj.name = members[i]["first_name"] + " " + members[i]["last_name"];
-    obj.num_missed_votes = members[i]["missed_votes"];
-    obj.perc_missed_votes = members[i]["missed_votes_pct"];
-    obj.links = members[i].url;
-    listData.push(obj);
-  }
-
-  listData.sort(function (obj1, obj2) {
-    return obj1.perc_missed_votes - obj2.perc_missed_votes;
-  });
-
-  var ptn = Math.round((members.length * (10 / 100)));
-  var listDataFiltered = [];
-  
-  for (i = 0; i < members.length; i++) {
-    if (listData[i]["perc_missed_votes"] <= listData[ptn]["perc_missed_votes"]) {
-      listDataFiltered.push(listData[i]);
-    }
-  }
-  statistics.mostEngaged = listDataFiltered;
-}
-
-function mostEngagedTable() {
-  var listDataFiltered = statistics.mostEngaged;
-  for (i = 0; i < listDataFiltered.length; i++) {
-    var row = document.createElement("tr");
-    var fullName = listDataFiltered[i].name;
-    var link = document.createElement("a");
-    link.setAttribute("href", listDataFiltered[i].links);
-    link.innerHTML = fullName;
-    var totmissedVotes = listDataFiltered[i].num_missed_votes;
-    var percMissedVotes = listDataFiltered[i].perc_missed_votes;
-    var cells = [link, totmissedVotes, percMissedVotes];
+        obj.name = member.first_name + " " + member.last_name;
+        obj.num_missed_votes = member.missed_votes;
+        obj.perc_missed_votes = member.missed_votes_pct;
+        obj.num_total_votes = member.total_votes;
+        obj.perc_vote_wparty_pct = member.votes_with_party_pct;
+        obj.links = member.url;
+        return obj;
+        })
+    statistics.membersObj = membersObj;
+     if (window.location.href.includes("attendance")){
+       leastEngagedFiltered(descendingOrder);
+       mostEngagedFiltered(ascendingOrder);
+     } else if (window.location.href.includes("loyalty")) {
+       mostLoyalFiltered(descendingOrder);
+       leastLoyalFiltered(ascendingOrder);
+     }
     
-    for (var j = 0; j < cells.length; j++) {
-      var tableColumns = document.createElement("td");
-      
-      tableColumns.append(cells[j]);
-      row.append(tableColumns);
-    }
-
-    document.getElementById("mostBody").append(row);
-  }
-}
-
-function least_engaged() {
-  var listData = [];
-
-  for (var i = 0; i < members.length; i++) {
-    var obj = {
-      name: "",
-      num_missed_votes: "",
-      perc_missed_votes: ""
-    };
-
-    obj.name = members[i]["first_name"] + " " + members[i]["last_name"];
-    obj.num_missed_votes = members[i]["missed_votes"];
-    obj.perc_missed_votes = members[i]["missed_votes_pct"];
-    obj.links = members[i].url;
-    listData.push(obj);
-  }
-
-  listData.sort(function (obj1, obj2) {
-    return obj2.perc_missed_votes - obj1.perc_missed_votes;
-  });
-
-  var ptn = Math.round((members.length * (10 / 100)));
-  
-  
-  var listDataFiltered = [];
-  
-  for (i = 0; i < members.length; i++) {
-    if (listData[i]["perc_missed_votes"] >= listData[ptn]["perc_missed_votes"]) {
-      listDataFiltered.push(listData[i]);
-    }
-  }
-  statistics.leastEngaged = listDataFiltered;
-}
-
-function leastEngagedTable() {
-  var listDataFiltered = statistics.leastEngaged;
-  for (i = 0; i < listDataFiltered.length; i++) {
-    var row = document.createElement("tr");
-    var fullName = listDataFiltered[i].name;
-    var link = document.createElement("a");
-    link.setAttribute("href", listDataFiltered[i].links);
-    link.innerHTML = fullName;
-    var totmissedVotes = listDataFiltered[i].num_missed_votes;
-    var percMissedVotes = listDataFiltered[i].perc_missed_votes;
-    var cells = [link, totmissedVotes, percMissedVotes];
     
-    for (var j = 0; j < cells.length; j++) {
-      var tableColumns = document.createElement("td");
-      
-      tableColumns.append(cells[j]);
-      row.append(tableColumns);
-    }
-
-    document.getElementById("leastBody").append(row);
-  }
+  
 }
 
-function least_loyal() {
-  var listData = [];
-  var listDataFiltered = [];
-
-  for (var i = 0; i < members.length; i++) {
-    var obj = {
-      name: "",
-      num_total_votes: "",
-      perc_vote_wparty_pct: ""
-    };
-
-    obj.name = members[i]["first_name"] + " " + members[i]["last_name"];
-    obj.num_total_votes = members[i]["total_votes"];
-    obj.perc_vote_wparty_pct = members[i]["votes_with_party_pct"];
-    obj.links = members[i].url;
-    listData.push(obj);
-  }
-
-  listData.sort(function (obj1, obj2) {
-    return obj1.perc_vote_wparty_pct - obj2.perc_vote_wparty_pct;
-  });
-
-  var ptn = Math.round((members.length * (10 / 100)));
-
-   for (i = 0; i < members.length; i++) {
-     
-    if (listData[i]["perc_vote_wparty_pct"] <= listData[ptn]["perc_vote_wparty_pct"]) {
-      listDataFiltered.push(listData[i]);
+const descendingOrder = (membersObj, x) => {                             // descending order for leastEngaged and mostLoyal
+   
+    const sortedDescending = membersObj.slice().sort((a, b) => {      //use slice method, so that we keep the statistics.membersObj array unaffected
+     return b[x] - a[x];                                    
+   })
+    //console.log(sortedDescending);
+    let listDataFiltered = [];
+  
+  for (i = 0; i < sortedDescending.length; i++) {
+    if (sortedDescending[i][x] >= sortedDescending[statistics.ptn][x]) {
+      listDataFiltered.push(sortedDescending[i]);
     }
   }
-  console.log(listDataFiltered.length);
-  statistics.leastLoyal = listDataFiltered;
+  statistics.leastEngagedMostLoyal = listDataFiltered;
 }
 
-
-function bottomLoyalTable() {
-  var listDataFiltered = statistics.leastLoyal;
-  for (i = 0; i < listDataFiltered.length; i++) {
-    var row = document.createElement("tr");
-    var fullName = listDataFiltered[i].name;
-    var link = document.createElement("a");
-    link.setAttribute("href", listDataFiltered[i].links);
-    link.innerHTML = fullName;
-    var totmissedVotes = listDataFiltered[i].num_total_votes;
-    var percMissedVotes = listDataFiltered[i].perc_vote_wparty_pct;
-    var cells = [link, totmissedVotes, percMissedVotes];
+const ascendingOrder = (membersObj, x) => {
+  const sortedAscending = membersObj.slice().sort((a, b) => {      //use slice method, so that we keep the statistics.membersObj array unaffected
+     return a[x] - b[x];                                    
+   })
     
-    for (var j = 0; j < cells.length; j++) {
-      var tableColumns = document.createElement("td");
-      
-      tableColumns.append(cells[j]);
-      row.append(tableColumns);
+  let listDataFiltered = [];
+  
+  for (i = 0; i < sortedAscending.length; i++) {
+    if (sortedAscending[i][x] <= sortedAscending[statistics.ptn][x]) {
+      listDataFiltered.push(sortedAscending[i]);
     }
-
-    document.getElementById("bottomLoyalBody").append(row);
   }
+  statistics.mostEngagedLeastLoyal = listDataFiltered;
 }
 
-function most_loyal() {
-  var listData = [];
-  var listDataFiltered = [];
-
-  for (var i = 0; i < members.length; i++) {
-    var obj = {
-      name: "",
-      num_total_votes: "",
-      perc_vote_wparty_pct: ""
-    };
-
-    obj.name = members[i]["first_name"] + " " + members[i]["last_name"];
-    obj.num_total_votes = members[i]["total_votes"];
-    obj.perc_vote_wparty_pct = members[i]["votes_with_party_pct"];
-    obj.links = members[i].url;
-    listData.push(obj);
-  }
-
-  listData.sort(function (obj1, obj2) {
-    return obj2.perc_vote_wparty_pct - obj1.perc_vote_wparty_pct;
-  });
-
-  var ptn = Math.round((members.length * (10 / 100)));
-
-  for (i = 0; i < members.length; i++) {
-     
-    if (listData[i]["perc_vote_wparty_pct"] >= listData[ptn]["perc_vote_wparty_pct"]) {
-      listDataFiltered.push(listData[i]);
-    }
-  }
-  statistics.mostLoyal = listDataFiltered;
+const createTable = (array,id, arg1, arg2) => {
+   statistics[array].forEach(member => {
+    let row = document.createElement('tr');
+     row.innerHTML =
+       `<td><a href=${member.links}>${member.name}</a></td>
+        <td>${member[arg1]}</td>
+        <td>${member[arg2]}</td>`;
+    document.querySelector(id).appendChild(row);
+  })
 }
 
-function topLoyalTable() {
-  var listDataFiltered = statistics.mostLoyal;
-  for (i = 0; i < listDataFiltered.length; i++) {
-    var row = document.createElement("tr");
-    var fullName = listDataFiltered[i].name;
-    var link = document.createElement("a");
-    link.setAttribute("href", listDataFiltered[i].links);
-    link.innerHTML = fullName;
-    var totmissedVotes = listDataFiltered[i].num_total_votes;
-    var percMissedVotes = listDataFiltered[i].perc_vote_wparty_pct;
-    var cells = [link, totmissedVotes, percMissedVotes];
-    
-    for (var j = 0; j < cells.length; j++) {
-      var tableColumns = document.createElement("td");
-      
-      tableColumns.append(cells[j]);
-      row.append(tableColumns);
-    }
+const leastEngagedFiltered = (callback) => {
+   
+  callback(statistics.membersObj, 'perc_missed_votes')
+  createTable('leastEngagedMostLoyal','#leastEngagedBody','num_missed_votes','perc_missed_votes')
+}
+const mostLoyalFiltered = (callback) => {
+ 
+    callback(statistics.membersObj,'perc_vote_wparty_pct')
+    createTable('leastEngagedMostLoyal','#mostLoyalBody','num_total_votes','perc_vote_wparty_pct')
+}
 
-    document.getElementById("topLoyalBody").append(row);
-  }
+const mostEngagedFiltered = (callback) => {
+   
+  callback(statistics.membersObj, 'perc_missed_votes')
+  createTable('mostEngagedLeastLoyal','#mostEngagedBody','num_missed_votes','perc_missed_votes')
+}
+const leastLoyalFiltered = (callback) => {
+ 
+    callback(statistics.membersObj,'perc_vote_wparty_pct')
+    createTable('mostEngagedLeastLoyal','#leastLoyalBody','num_total_votes','perc_vote_wparty_pct')
 }
