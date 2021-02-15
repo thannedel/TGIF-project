@@ -6,10 +6,9 @@ if (window.location.href.includes("house")) {
 }
 fetching();
 
-var members;
 
-function fetching() {
-  var fetchConfig = fetch(this.site, {
+ function fetching() {
+  const fetchConfig = fetch(this.site, {
       method: "GET",
       headers: new Headers({
         "X-API-Key": "IeE1wTU066tNtYjhtk94zacJt53Q0OTHRia9YAJw"
@@ -20,15 +19,14 @@ function fetching() {
     })
     .then(function (json) {
       data = json;
-
-      members = data.results[0].members;
+      const members = data.results[0].members;
       let ptn = Math.round((members.length * (10 / 100)));
       statistics.ptn = ptn;
-      let spin = document.getElementById("loader").style.display = "none"
       
-      attendance();
-      glance();
+      
       createMembersObject(members)
+      attendance(members);
+      let spin = document.getElementById("loader").style.display = "none"
     })
     .catch(function (error) {
       console.log(error);
@@ -57,7 +55,7 @@ const statistics = {
   numberOfDem: 0,
   numberOfRep: 0,
   independents: 0,
-  totalNumber: 0,
+  totalPoliticiansNumber: 0,
   repvotedwparty: 0,
   demvotedwparty: 0,
   totalvotedwparty: 0,
@@ -68,7 +66,7 @@ const statistics = {
 };
 
 
-function attendance() {
+function attendance(members) {
   for (let i = 0; i < members.length; i++) {
     if (members[i].party === "D") {
       statistics.numberOfDem++;
@@ -78,8 +76,7 @@ function attendance() {
       statistics.independents++;
     }
   }
-  statistics.totalNumber =
-    statistics.numberOfDem + statistics.numberOfRep + statistics.independents;
+  statistics.totalPoliticiansNumber = members.length;
 
   let sum1 = 0;
   let sum2 = 0;
@@ -104,30 +101,20 @@ function attendance() {
     statistics.Indvotedwparty = (sum3 / statistics.independents).toFixed(2);
   }
   statistics.totalvotedwparty = (
-    (sum1 + sum2 + sum3) /
-    (statistics.numberOfDem + statistics.numberOfRep + statistics.independents)
-  ).toFixed(2);
+    (sum1 + sum2 + sum3) / (statistics.totalPoliticiansNumber)).toFixed(2);
+  glance();
 }
 
 function glance() {
   //glance table
-  var repnum = document.getElementById("repnum");
-  var repvote = document.getElementById("repvote");
-  var demnum = document.getElementById("demnum");
-  var demvote = document.getElementById("demvote");
-  var Indnum = document.getElementById("Indnum");
-  var Indvote = document.getElementById("Indvote");
-  var totalnum = document.getElementById("totalnum");
-  var totalvote = document.getElementById("totalvote");
-
-  repnum.innerHTML = statistics.numberOfRep;
-  repvote.innerHTML = statistics.repvotedwparty;
-  demnum.innerHTML = statistics.numberOfDem;
-  demvote.innerHTML = statistics.demvotedwparty;
-  Indnum.innerHTML = statistics.independents;
-  Indvote.innerHTML = statistics.Indvotedwparty;
-  totalnum.innerHTML = statistics.totalNumber;
-  totalvote.innerHTML = statistics.totalvotedwparty;
+  document.getElementById("repnum").innerHTML = statistics.numberOfRep;
+  document.getElementById("repvote").innerHTML = statistics.repvotedwparty;
+  document.getElementById("demnum").innerHTML = statistics.numberOfDem;
+  document.getElementById("demvote").innerHTML = statistics.demvotedwparty;
+  document.getElementById("Indnum").innerHTML = statistics.independents;
+  document.getElementById("Indvote").innerHTML = statistics.Indvotedwparty;
+  document.getElementById("totalnum").innerHTML = statistics.totalPoliticiansNumber;
+  document.getElementById("totalvote").innerHTML = statistics.totalvotedwparty;
 }
 
 const createMembersObject = (members) => {
