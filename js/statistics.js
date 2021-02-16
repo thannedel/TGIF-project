@@ -5,9 +5,7 @@ if (window.location.href.includes("house")) {
   site = "https://api.propublica.org/congress/v1/113/house/members.json";
 }
 fetching();
-
-
- function fetching() {
+function fetching() {
   const fetchConfig = fetch(this.site, {
       method: "GET",
       headers: new Headers({
@@ -22,8 +20,6 @@ fetching();
       const members = data.results[0].members;
       let ptn = Math.round((members.length * (10 / 100)));
       statistics.ptn = ptn;
-      
-      
       createMembersObject(members)
       attendance(members);
       let spin = document.getElementById("loader").style.display = "none"
@@ -52,13 +48,22 @@ function topFunction() {
 }
 
 const statistics = {
-  numberOfDem: 0,
-  numberOfRep: 0,
-  independents: 0,
-  totalPoliticiansNumber: 0,
-  repvotedwparty: 0,
-  demvotedwparty: 0,
-  totalvotedwparty: 0,
+  demGlance: {
+    numberOfDem: 0,
+     demvotedwparty: 0,
+  },
+  repGlance: {
+    numberOfRep: 0,
+    repvotedwparty: 0,
+  },
+  indGlance:{
+    independents: 0,
+    indvotedwparty:0
+  },
+  totalGlance: {
+    totalPoliticiansNumber: 0,
+    totalvotedwparty: 0,
+  },
   ptn: "",             // 10% of members
   membersObj: [],
   leastEngagedMostLoyal: [],
@@ -67,54 +72,43 @@ const statistics = {
 
 
 function attendance(members) {
-  for (let i = 0; i < members.length; i++) {
-    if (members[i].party === "D") {
-      statistics.numberOfDem++;
-    } else if (members[i].party === "R") {
-      statistics.numberOfRep++;
-    } else {
-      statistics.independents++;
-    }
-  }
-  statistics.totalPoliticiansNumber = members.length;
-
   let sum1 = 0;
   let sum2 = 0;
   let sum3 = 0;
-  for (i = 0; i < members.length; i++) {
+  for (let i = 0; i < members.length; i++) {
     if (members[i].party === "D") {
+      statistics.demGlance.numberOfDem++;
       sum1 += members[i].votes_with_party_pct;
-    }
-
-    if (members[i].party === "R") {
+    } else if (members[i].party === "R") {
+      statistics.repGlance.numberOfRep++;
       sum2 += members[i].votes_with_party_pct;
-    }
-    if (members[i].party === "I") {
+    } else {
+      statistics.indGlance.independents++;
       sum3 += members[i].votes_with_party_pct;
     }
   }
-  statistics.demvotedwparty = (sum1 / statistics.numberOfDem).toFixed(2);
-  statistics.repvotedwparty = (sum2 / statistics.numberOfRep).toFixed(2);
-  if (statistics.independents === 0) {
-    statistics.Indvotedwparty = 0;
+  statistics.totalGlance.totalPoliticiansNumber = members.length;
+  statistics.demGlance.demvotedwparty = (sum1 / statistics.demGlance.numberOfDem).toFixed(2);
+  statistics.repGlance.repvotedwparty = (sum2 / statistics.repGlance.numberOfRep).toFixed(2);
+  if (statistics.indGlance.independents === 0) {
+    statistics.indGlance.indvotedwparty = 0;
   } else {
-    statistics.Indvotedwparty = (sum3 / statistics.independents).toFixed(2);
+    statistics.indGlance.indvotedwparty = (sum3 / statistics.indGlance.independents).toFixed(2);
   }
-  statistics.totalvotedwparty = (
-    (sum1 + sum2 + sum3) / (statistics.totalPoliticiansNumber)).toFixed(2);
+  statistics.totalGlance.totalvotedwparty = (
+    (sum1 + sum2 + sum3) / (statistics.totalGlance.totalPoliticiansNumber)).toFixed(2);
   glance();
 }
 
-function glance() {
-  //glance table
-  document.getElementById("repnum").innerHTML = statistics.numberOfRep;
-  document.getElementById("repvote").innerHTML = statistics.repvotedwparty;
-  document.getElementById("demnum").innerHTML = statistics.numberOfDem;
-  document.getElementById("demvote").innerHTML = statistics.demvotedwparty;
-  document.getElementById("Indnum").innerHTML = statistics.independents;
-  document.getElementById("Indvote").innerHTML = statistics.Indvotedwparty;
-  document.getElementById("totalnum").innerHTML = statistics.totalPoliticiansNumber;
-  document.getElementById("totalvote").innerHTML = statistics.totalvotedwparty;
+function glance() {           //glance table
+  document.getElementById("repnum").innerHTML = statistics.repGlance.numberOfRep;
+  document.getElementById("repvote").innerHTML = statistics.repGlance.repvotedwparty;
+  document.getElementById("demnum").innerHTML = statistics.demGlance.numberOfDem;
+  document.getElementById("demvote").innerHTML = statistics.demGlance.demvotedwparty;
+  document.getElementById("Indnum").innerHTML = statistics.indGlance.independents;
+  document.getElementById("Indvote").innerHTML = statistics.indGlance.indvotedwparty;
+  document.getElementById("totalnum").innerHTML = statistics.totalGlance.totalPoliticiansNumber;
+  document.getElementById("totalvote").innerHTML = statistics.totalGlance.totalvotedwparty;
 }
 
 const createMembersObject = (members) => {
@@ -137,18 +131,15 @@ const createMembersObject = (members) => {
        mostLoyalFiltered(descendingOrder);
        leastLoyalFiltered(ascendingOrder);
      }
-    
-    
-  
-}
+  }
 
 const descendingOrder = (membersObj, x) => {                             // descending order for leastEngaged and mostLoyal
    
     const sortedDescending = membersObj.slice().sort((a, b) => {      //use slice method, so that we keep the statistics.membersObj array unaffected
      return b[x] - a[x];                                    
-   })
-    //console.log(sortedDescending);
-    let listDataFiltered = [];
+    })
+  
+     let listDataFiltered = [];
   
   for (i = 0; i < sortedDescending.length; i++) {
     if (sortedDescending[i][x] >= sortedDescending[statistics.ptn][x]) {
