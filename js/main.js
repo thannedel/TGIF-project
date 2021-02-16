@@ -157,9 +157,9 @@ hideBox2.addEventListener('change', function (e) {
 
 hideBox3.addEventListener('change', function () {
   if (hideBox3.checked) {
-    selectedParties.push('I');
+    selectedParties.push('ID');
   } else {
-    var index = selectedParties.indexOf('I');
+    var index = selectedParties.indexOf('ID');
     if (index != -1) selectedParties.splice(index, 1);
   }
   createTable();
