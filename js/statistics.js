@@ -90,13 +90,22 @@ function attendance(members) {
   statistics.totalGlance.totalPoliticiansNumber = members.length;
   statistics.demGlance.demvotedwparty = (sum1 / statistics.demGlance.numberOfDem).toFixed(2);
   statistics.repGlance.repvotedwparty = (sum2 / statistics.repGlance.numberOfRep).toFixed(2);
+  // check for undefined
   if (statistics.indGlance.independents === 0) {
     statistics.indGlance.indvotedwparty = 0;
-  } else {
+    statistics.totalGlance.totalvotedwparty =
+      ((statistics.demGlance.demvotedwparty * statistics.demGlance.numberOfDem +
+        statistics.repGlance.repvotedwparty * statistics.repGlance.numberOfRep)
+        / (statistics.totalGlance.totalPoliticiansNumber)).toFixed(2);   // weight average
+   } else {
     statistics.indGlance.indvotedwparty = (sum3 / statistics.indGlance.independents).toFixed(2);
+    statistics.totalGlance.totalvotedwparty =
+      ((statistics.demGlance.demvotedwparty * statistics.demGlance.numberOfDem +
+        statistics.repGlance.repvotedwparty * statistics.repGlance.numberOfRep
+        + statistics.indGlance.indvotedwparty * statistics.indGlance.independents)
+        / (statistics.totalGlance.totalPoliticiansNumber)).toFixed(2);  // weight average
   }
-  statistics.totalGlance.totalvotedwparty = (
-    (sum1 + sum2 + sum3) / (statistics.totalGlance.totalPoliticiansNumber)).toFixed(2);
+  
   glance();
 }
 
