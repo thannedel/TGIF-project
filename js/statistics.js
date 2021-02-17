@@ -96,14 +96,14 @@ function attendance(members) {
     statistics.totalGlance.totalvotedwparty =
       ((statistics.demGlance.demvotedwparty * statistics.demGlance.numberOfDem +
         statistics.repGlance.repvotedwparty * statistics.repGlance.numberOfRep)
-        / (statistics.totalGlance.totalPoliticiansNumber)).toFixed(2);   // weight average
+        / (statistics.totalGlance.totalPoliticiansNumber)).toFixed(2);   // weighted average
    } else {
     statistics.indGlance.indvotedwparty = (sum3 / statistics.indGlance.independents).toFixed(2);
     statistics.totalGlance.totalvotedwparty =
       ((statistics.demGlance.demvotedwparty * statistics.demGlance.numberOfDem +
         statistics.repGlance.repvotedwparty * statistics.repGlance.numberOfRep
         + statistics.indGlance.indvotedwparty * statistics.indGlance.independents)
-        / (statistics.totalGlance.totalPoliticiansNumber)).toFixed(2);  // weight average
+        / (statistics.totalGlance.totalPoliticiansNumber)).toFixed(2);  // weighted average
   }
   
   glance();
@@ -117,7 +117,7 @@ function glance() {           //glance table
   document.getElementById("Indnum").innerHTML = statistics.indGlance.independents;
   document.getElementById("Indvote").innerHTML = statistics.indGlance.indvotedwparty;
   document.getElementById("totalnum").innerHTML = statistics.totalGlance.totalPoliticiansNumber;
-  document.getElementById("totalvote").innerHTML = statistics.totalGlance.totalvotedwparty;
+  document.getElementById("totalvote").innerHTML = statistics.totalGlance.totalvotedwparty + " (w.a)";
 }
 
 const createMembersObject = (members) => {
